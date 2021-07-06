@@ -1,0 +1,225 @@
+.test-cont{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .card{
+        width: 912px;
+        height: 450px;
+        position: relative;
+        .video-js{
+
+            width: 100%;
+            height: 100%;
+            
+        }
+        .test{
+            animation: slidein 0.5s ease-in-out 1 normal;
+        }
+        .big-play{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 85px;
+            height: 85px;
+
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.7);
+            display: flex; // to do
+            justify-content: center;
+            align-items: center;
+            -webkit-box-shadow: 0px 0px 11px 5px rgba(0,0,0,0.43); 
+            box-shadow: 0px 0px 11px 5px rgba(0,0,0,0.43);
+            opacity: 0;
+            transition: all 500ms;
+            img{
+                width: 35px;
+                height: 35px;
+                max-width: 35px;
+                max-height: 35px;
+                min-width: 35px;
+                min-height: 35px;
+                padding: 20px;
+            }   
+        }
+        .control-bar{
+            position: absolute;
+            bottom: 0;
+            background-color: transparent;
+            display: flex;
+            width: 100%;
+            height: 50px;
+            justify-content: space-between;
+            flex-direction: row;
+            align-items: start;
+            .play-volum-section{
+                width: auto;
+                margin-left: 35px;
+                 display: flex;
+                justify-content: flex-start;
+                flex-direction: row;
+                align-items:  center;
+                #volume-icon{
+                    margin-right: 10px;
+                }
+                #play-pause{
+                    margin-right: 25px;
+                }
+            }
+            .full-setting-section{
+                width: 65px;
+                margin-right: 35px;
+                display: flex;
+                justify-content: space-between;
+                flex-direction: row;
+                align-items: start;
+            }
+            .play-pause-button{
+                //
+                cursor: pointer;
+            }
+            
+        }
+    }
+}
+
+@keyframes slidein {
+    0% { opacity: 0; }
+    25% { opacity: 0,5; }
+
+    50% { opacity: 1; }
+    75% { opacity: 0.5; }
+
+    100% { opacity: 0; }
+}
+
+$height: 2px;
+$thumb-height: 8px;
+$track-height: 2px;
+
+// colours
+$upper-color: #808080;
+$lower-color: #FFFFFF;
+$thumb-color: #FFFFFF;
+$thumb-hover-color: #FFF;
+
+$upper-background: linear-gradient(to bottom, $upper-color, $upper-color) 100% 50% / 100% $track-height no-repeat transparent;
+$lower-background: linear-gradient(to bottom, $lower-color, $lower-color) 100% 50% / 100% $track-height no-repeat transparent;
+
+// Webkit cannot style progress so we fake it with a long shadow
+// on the thumb element
+@function webkit-slider-thumb-shadow($i: 1) {
+  $val: #{$i}px 0 0 -#{($thumb-height - $track-height) / 2} #{$upper-color};
+  @if $i == 1 {
+    @for $k from 2 through 200 {
+      $val: #{$val}, webkit-slider-thumb-shadow($k);
+    }
+  }
+  @return $val;
+}
+
+
+    .e-range {
+      display: block;
+      appearance: none;
+      width: 100px;
+      margin: 0;
+      height: $height;
+      cursor: pointer;
+      
+      &:focus {
+        outline: none;
+      }
+    }
+    
+    // Webkit
+    .e-range::-webkit-slider-runnable-track {
+      width: 50%;
+      height: $height;
+      background: transparent;
+    }
+    
+    .e-range::-webkit-slider-thumb {
+      position: relative;
+      appearance: none;
+      height: $thumb-height;
+      width: $thumb-height;
+      background: $thumb-color;
+      border-radius: 100%;
+      border: 0;
+      top: 50%;
+      margin-top: (-$thumb-height/2);
+      box-shadow: webkit-slider-thumb-shadow();
+      transition: background-color 150ms;
+    }
+    
+    // Firefox
+    .e-range::-moz-range-track,
+    .e-range::-moz-range-progress {
+      width: 100%;
+      height: $height;
+      background: $upper-background;
+    }
+    
+    .e-range::-moz-range-progress {
+      background: $lower-background;
+    }
+    
+    .e-range::-moz-range-thumb {
+      appearance: none;
+      margin: 0;
+      height: $thumb-height;
+      width: $thumb-height;
+      background: $thumb-color;
+      border-radius: 100%;
+      border: 0;
+      transition: background-color 150ms;
+    }
+    
+    // Internet Exploder
+    .e-range::-ms-track {
+      width: 100%;
+      height: $height;
+      border: 0;
+      // color needed to hide track marks
+      color: transparent;
+      background: transparent;
+    }
+    
+    .e-range::-ms-fill-lower {
+      background: $lower-background;
+    }
+    
+    .e-range::-ms-fill-upper {
+      background: $upper-background;
+    }
+    
+    .e-range::-ms-thumb {
+      appearance: none;
+      height: $thumb-height;
+      width: $thumb-height;
+      background: $thumb-color;
+      border-radius: 100%;
+      border: 0;
+      transition: background-color 150ms;
+      // IE Edge thinks it can support -webkit prefixes
+      top: 0;
+      margin: 0;
+      box-shadow: none;
+    }
+    
+    .e-range:hover,
+    .e-range:focus {
+    
+      &::-webkit-slider-thumb {
+        background-color: $thumb-hover-color;
+      }
+      &::-moz-range-thumb {
+        background-color: $thumb-hover-color;
+      }
+      &::-ms-thumb {
+        background-color: $thumb-hover-color;
+      }
+    }
