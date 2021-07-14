@@ -53,11 +53,11 @@
             height: 50px;
             justify-content: space-between;
             flex-direction: row;
-            align-items: start;
+            align-items: flex-start;
             .play-volum-section{
                 width: auto;
                 margin-left: 35px;
-                 display: flex;
+                 display: flex-start;
                 justify-content: flex-start;
                 flex-direction: row;
                 align-items:  center;
@@ -74,7 +74,7 @@
                 display: flex;
                 justify-content: space-between;
                 flex-direction: row;
-                align-items: start;
+                align-items: flex-start;
             }
             .play-pause-button{
                 //
